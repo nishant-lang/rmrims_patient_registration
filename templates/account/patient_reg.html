@@ -1,0 +1,185 @@
+
+{% load static %}
+{% include 'partials/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/patient_reg.css' %}">
+</head>
+<body>
+
+<div class="main-container">
+<div class="form-cls">
+<div class="form-header">
+<div class="header-items">
+    
+    <img src="/static/account/logo/rmrims logo.png" alt="">
+    <div class="head-text">
+
+    <h2>Patient Registration Form</h2>
+    </div>
+</div>
+
+    <div class="right-img">
+    
+    </div>
+
+</div>
+
+<!--modal Error code starts-->
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <!-- Modal for Success -->
+            <div class="modal-container" id="modal">
+                <div class="modal-area">
+                    <div class="modal-header">
+                        <button class="close-button" id="modl-header-btn">×</button>
+                    </div>
+                    <div class="modal-content">
+                        <img src="{% static 'account/logo/success_tick.png' %}" alt="Success">
+                        <p>{{ message }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modl-foot-btn">Okay</button>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+<!--modal Error code End.-->
+<form method="POST"  action="{% url 'patient-registration' %}">
+    {% csrf_token %}
+
+<!-- Form Errors -->
+{% if form.non_field_errors %}
+<div class="form-errors" id="non-field-error">
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    <div class="form-error-btn">
+        <button class="close-button" id="cls-btn">×</button>
+    </div>
+</div>
+{% endif %} 
+<!-- Form Errors  End-->
+
+
+<div class="form">
+
+<!-- <div class="personal-and-contact"> -->
+<div class="personal-info">
+
+    <div class="input-group">
+        <label for="name">Name <p> *</p> </label>
+        {{ form.name }}
+    </div>
+
+
+    <div class="input-group">
+        <label for="dob">Age <p> *</p> </label>
+        {{ form.age }}
+    </div>
+
+    
+    <div class="input-group">
+        <label for="gender">Gender <p> *</p> </label>
+        {{ form.gender }}
+    </div> 
+
+    <div class="input-group">
+        <label for="email">Email </label>
+        {{ form.email }}
+    </div>
+
+</div>
+<!-- </div> -->
+
+<div class="contact-info">
+
+    <div class="input-group">
+        <label for="contact_number">Contact Number <p> *</p> </label>
+        {{ form.contact_number }}
+    </div>
+    
+    <div class="input-group">
+        <label for="contact_number"> Aadhar Number </label>
+        {{ form.aadhar_number }}
+    </div>
+
+    <div class="input-group">
+        <label for="state">State <p> *</p> </label>
+        {{ form.state}}
+    </div>
+
+
+    <div class="input-group">
+        <label for="district">District <p> *</p> </label>
+        {{ form.district }}
+    </div>
+
+</div>
+
+<!-- </div> -->
+
+<!-- <div class="medical-and-department"> -->
+
+<div class="medical-info">
+
+    <div class="input-group">
+        <label for="address">Address <p> *</p> </label>
+        {{ form.address }}
+    </div>
+
+    <div class="input-group ">
+        <label for="department">Department <p> *</p> </label>
+        {{ form.department }}
+    </div>
+
+    <div class="input-group">
+        <label for="consultation">Consultation type <p> *</p> </label>
+        {{ form.consultation_type }}
+    </div>
+
+    <div class="input-group">
+        <label for="dob">Appointment date <p> *</p> </label>
+        {{ form.appointment_date }}
+    </div>
+
+
+ </div>
+
+<!-- </div> -->
+
+<div class="form-sub">
+    <div class="input-group-symptoms">
+        <label for="department">Symptoms or Concern </label>
+        {{ form.symptoms }}
+    </div>
+
+
+<div class="sub-btn">
+    <button type="submit" id="form-submit"> Register </button>
+</div>
+
+</div>
+
+
+</form>
+
+</div>
+
+<!-- Uncomment if you need to use the JS file -->
+ <script src="{% static 'account/js/patient_reg.js' %}"></script> 
+
+ {% include 'partials/footer.html' %}
+</body>
+</html>
+

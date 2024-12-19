@@ -1,0 +1,811 @@
+:root {
+    --primary-color: #3498db; /* Blue */
+    --secondary-color: #2ecc71; /* Green */
+    --tertiary-color: #e74c3c; /* Red */
+    --background-color: #ecf0f1; /* Light Gray */
+    --text-color: #2c3e50; /* Dark Gray */
+    --link-color: #1abc9c; /* Teal */
+    --border-color: #bdc3c7; /* Gray */
+    --success-color: #08a54b; /* Success Green */
+    --warning-color: #f39c12; /* Warning Yellow */
+    --error-color: #e74c3c; /* Error Red */
+    --info-color: #3498db; /* Info Blue */
+    --light-primary: #5dade2; /* Light Blue */
+    --error-primary: #add8e6; /* Light Blue */
+    --dark-primary: #2e86c1; /* Dark Blue */
+    --light-secondary: #58d68d; /* Light Green */
+    --dark-secondary: #27ae60; /* Dark Green */
+    --light-tertiary: #e57373; /* Light Red */
+    --light-background: #f5f5f5; /* Light Gray */
+    --dark-background: #95a5a6; /* Dark Gray */
+    --highlight-color: #f39c12; /* Highlight Yellow */
+    --muted-color: #95a5a6; /* Muted Gray */
+    --accent-color: #9b59b6; /* Purple */
+    --neutral-color: #7f8c8d; /* Neutral Gray */
+    --neutral-white: #FFFFFF;
+    --form-registration: #dd5a21; /* Dark Red */
+    --red-color:#f63c3c;
+
+
+
+
+
+    --clr-primary-000: white;
+    --clr-primary-010: #ddd;
+    --clr-primary-020: #f2f2f2;
+    --clr-primary-030: green;
+    --clr-primary-040: red;
+    --clr-primary-050: black;
+  
+    --clr-primary-100: #1b285c;
+    --clr-primary-150: #504987;
+    --clr-primary-160: #050a30;
+    --clr-primary-170: #6420aa;
+    --clr-primary-180: #2c4e80;
+    --clr-primary-190: #8aa0df;
+    /* --clr-primary-170:#EF7C8E; */
+    --clr-primary-200: #ff6700;
+    --clr-primary-250: #fc4100;
+    --clr-primary-300: #a11000;
+    --clr-primary-330: rgb(228, 52, 52);
+    --clr-primary-350: #ff8532;
+    --clr-primary-400: #006769;
+    --clr-primary-450: #40a578;
+    --clr-primary-480: #26694b;
+    --clr-primary-490: #4ccd99;
+    --clr-primary-500: #717275;
+    --clr-primary-530: #dee2e6;
+    --clr-primary-550: #fff;
+    --clr-primary-600: #f0f8ff;
+    --clr-primary-650: rgb(218, 212, 212);
+    --clr-primary-700: #ffffff;
+    --clr-primary-750: #eaeaea;
+    --clr-primary-800: aliceblue;
+    --clr-primary-850: #5f9fe4;
+    --clr-primary-855: #0fcaf0;
+    --clr-primary-860: #acadb0;
+  
+    /* --clr-primary-200:#FF4500; */
+    --clr-primary-150: #504987;
+  
+    --clr-neutral-100: hsl(36, 100%, 99%);
+    --clr-neutral-200: hsl(60, 3%, 40%);
+    --clr-neutral-300: hsl(236, 13%, 42%);
+    --clr-neutral-400: hsl(240, 100%, 5%);
+  
+    --fw-regular: 400;
+    --fw-semi-bold: 700;
+    --fw-bold: 800;
+  
+    --fs-body: var(--size-093);
+    --fs-nav: var(--size-075);
+    --fs-primary-header: var(--size-300);
+    --fs-secondary-header: var(--size-200);
+    --fs-para: var(--size-093);
+  
+    --size-025: 0.2rem;
+    --size-050: 0.5rem;
+    --size-075: 0.75rem;
+    --size-093: 0.8rem;
+    --size-100: 1rem;
+    --size-150: 1.5rem;
+    --size-200: 2rem;
+    --size-300: 3rem;
+    --size-350: 3.5rem;
+    --size-400: 4rem;
+    --size-500: 5rem;
+    --size-600: 5rem;
+    --size-700: 7rem;
+}
+
+
+
+
+/* Base styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+  }
+
+
+/* Main container */
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--background-color);
+    margin-top:3em;
+    font-family: monospace,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.form-cls{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color:var(--form-area); */
+    background-color:var(--light-tertiary);
+    width: 100vw;
+    margin-top: 1em;
+    min-height: auto;
+}
+
+.form-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--form-registration);
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5em;
+}
+
+.header-items{
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+
+
+.header-items img{
+    width: 7em;
+    height:5.7em;
+    border-radius: 0px 35px;
+}
+
+.right-img{
+    width:8em; 
+}
+
+
+.head-text{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-header h2{
+font-family:monospace,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+color: white;
+text-shadow: #333;
+}
+
+
+
+.form-errors {
+    width: 100%;
+    min-height: 2.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background-color:var(--neutral-white);
+    color:var(--error-color);
+    border: 1.5px solid var(--error-color);
+    border-radius: 4px;
+}
+
+.form-errors p{
+    margin-left: 5px;
+
+}
+
+.form-error-btn button{
+       /* position: absolute; */
+       right: 10px;
+       background-color: transparent;
+       border: none;
+       font-size: 1.7em;
+       color: rgb(36, 33, 33);
+       cursor: pointer;
+}
+
+.form-error-btn button:active{
+    transform: scale(0.95); /* Simulate button press */
+    background-color: rgba(95, 69, 69, 0.3); /* Optional: Add a semi-transparent overlay for feedback */
+}
+
+
+/* Registration form container */
+.registration-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+
+/* Header of the form */
+.registration-header h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: baseline;
+    width: 100%;
+}
+
+
+
+.personal-info{
+    /* width: 25%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-info{
+    /* width: 25%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.medical-info{
+    /* width: 25%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Input group styling */
+.input-group {
+
+    margin-top: 18px;
+    margin-left: 2.5px;
+    margin-right: 2.5px; 
+}
+
+.input-group-initial select{
+    width: 6em;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+
+/* Label styling */
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    /* color: #333; */
+    color: var(--neutral-white);
+    margin-bottom: 1.5px;
+}
+
+/* Styling for form input fields */
+.input-group input,
+.input-group select
+ {
+    width: 16em;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: monospace,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* For the date of birth field */
+.input-group input[type="date"] {
+    padding: 10px;
+    font-size: 14px;
+}
+
+
+.form-sub{
+    margin-top: 10px;
+    width: 100%;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.input-group-symptoms label{
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    /* color: #333; */
+    color: var(--neutral-white);
+    margin-bottom: 1.5px;
+}
+
+.input-group-symptoms textarea{
+    width: 35em;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: monospace,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/* Styling for textarea */
+textarea {
+    resize: vertical;
+}
+
+/* Error message styling */
+.field-error {
+    color: red;
+    font-size: 12px;
+}
+
+/* Submit button container */
+.sub-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Submit button styling */
+.sub-btn button {
+    background-color:var(--form-registration);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sub-btn button:hover {
+    background-color:var(--error-color);
+}
+
+/* Terms and privacy checkbox group */
+.check-group {
+    margin-bottom: 20px;
+}
+
+.consent-checkbox {
+    margin-right: 8px;
+}
+
+.consent-label {
+    font-size: 14px;
+}
+
+
+/* Sign-in link and text */
+.signin-text {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signin-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signin-link:hover {
+    text-decoration: underline;
+}
+
+/* Styling the form for a better view */
+.registration-form .input-group input,
+.registration-form .input-group select,
+.registration-form .input-group textarea {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.registration-form .input-group label {
+    color: #333;
+}
+
+/* Adjusting styling for select inputs */
+.registration-form .input-group select {
+    cursor: pointer;
+}
+
+/* Error styles for form */
+
+.field-error p {
+    color: #e74c3c;
+    font-size: 12px;
+}
+
+/* Limit the height of select dropdown options */
+.expanded-dropdown select option {
+    max-height: 200px; 
+    overflow-y: auto;
+
+} 
+
+.sub-btn{
+    width: auto;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.sub-btn button {
+    width: 20em;
+    height: 3em;
+    /* background-image: url(/static/account/images/13_dhans11.jpg); */
+    background-image:var(--form-header);
+    color: var(--neutral-white);
+    font-weight: 700;
+    line-break: anywhere;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 3em;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.sub-btn button:active {
+    transform: scale(0.95); /* Simulate button press */
+    background-color: rgba(0, 0, 0, 0.3); /* Optional: Add a semi-transparent overlay for feedback */
+}
+
+
+.input-group label 
+{
+    display: flex;
+    align-items:flex-start;
+   
+
+}
+
+.input-group label p {
+    color:var(--red-color);
+    height: 15px;
+    display: flex;
+    align-items: center;
+    margin-left: 1px;
+}
+
+
+/* MODALE CODE */
+
+#modal {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(237, 200, 200, 0.5); /* Optional backdrop */
+    
+}
+
+.modal-area{
+  height: 27em;
+  width: 27em;
+  z-index: 1000;
+  background-color: rgb(250, 235, 235);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+.modal-header{
+  width: 100%;
+  height: 28px;
+  position: relative;
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+.modal-header button {
+  position: absolute; /* Ensure it floats inside the modal header */
+  right: 10px; /* Adjust for alignment */
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove default button border */
+  font-size: 1.7em; /* Size the button appropriately */
+  color: black; /* Button color */
+  cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+.modal-header button:active{
+  transform: scale(0.85);
+}
+
+.modal-content{
+  height: 86%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img{
+  width: 100%;
+  height: 90%;
+}
+.modal-content p{
+  color: var(--dark-secondary);
+}
+
+.modal-footer{
+  /* width: 100%; */
+  /* height: 42px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-footer button{
+  background-color: transparent;
+  height: 2em;
+  width: 5em;
+  border-radius: 2em;
+  color: var(--background-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  background-color: var(--success-color); /* Darker shade for click */
+}
+
+
+.modal-footer button:active {
+  transform: scale(0.95); /* Button shrink effect on click */
+  background-color: var(--light-secondary);
+}
+
+/* MODAL CODE END */
+
+@media screen and (max-width: 922px) {
+
+    .form {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .personal-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .contact-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .medical-info {
+   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .input-group input, .input-group select {
+        width: 35em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .form-cls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--light-tertiary);
+        width: 100%;
+        margin-top: 1.7em;
+        min-height: 100vh;
+    }
+
+
+    .right-img {
+        width: 0;
+       }
+   
+       .header-items {
+           width: 90%;
+           height: auto;
+           display: flex;
+       
+       }
+
+
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+
+    .right-img {
+     width: 0;
+    }
+
+    .header-items {
+        width: 90%;
+        height: auto;
+        display: flex;
+    
+    }
+
+    .header-items img {
+        width: 6em;
+        height: inherit;
+        border-radius: 0px 40px;
+    }
+
+    
+
+}
+
+@media screen and (max-width: 496px) {
+
+
+    .header-items {
+        width: 98%;
+        height: auto;
+        display: flex;
+        justify-content: space-around;
+    }
+
+  
+
+    .header-items img {
+        width: 5em;
+        height: inherit;
+        border-radius: 0px 30px;
+    }
+
+   
+
+    .form-header h2 {
+        font-size: 18px;
+        font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: white;
+        text-shadow: #333;
+        
+    }
+ 
+
+    .input-group input, .input-group select {
+        width: 25em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+
+    .input-group-symptoms textarea {
+        width: 25em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: monospace, system-ui, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+}
+
+
+@media screen and (max-width: 365px) {
+
+    .form-cls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--light-tertiary);
+        width: 100%;
+        margin-top: 1.7em;
+        min-height: 100vh;
+    }
+
+
+    .input-group input, .input-group select {
+        width: 20em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .input-group-symptoms textarea {
+        width: 20em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+
+    .form-header h2 {
+        font-size: 18px;
+        font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: white;
+        text-shadow: #333;
+        font-size: 15px;
+    }
+
+    .header-items img {
+        width: 4em;
+        height: inherit;
+        border-radius: 0px 24px;
+    }
+
+
+    .sub-btn button {
+        width: 15em;
+        height: 3em;
+        /* background-image: url(/static/account/images/13_dhans11.jpg); */
+        background-image: var(--form-header);
+        color: var(--neutral-white);
+        font-weight: 700;
+        line-break: anywhere;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 3em;
+        transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .form-cls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--light-tertiary);
+        width: 100%;
+        margin-top: 2.4em;
+        min-height: 100vh;
+    }
+}

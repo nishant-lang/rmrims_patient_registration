@@ -1,0 +1,286 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #3498db; /* Blue */
+    --secondary-color: #2ecc71; /* Green */
+    --tertiary-color: #e74c3c; /* Red */
+    --background-color: #ecf0f1; /* Light Gray */
+    --text-color: #2c3e50; /* Dark Gray */
+    --link-color: #1abc9c; /* Teal */
+    --border-color: #bdc3c7; /* Gray */
+    --success-color: #2ecc71; /* Success Green */
+    --warning-color: #f39c12; /* Warning Yellow */
+    --error-color: #e74c3c; /* Error Red */
+    --info-color: #3498db; /* Info Blue */
+    --light-primary: #5dade2; /* Light Blue */
+    --error-primary: #add8e6; /* Light Blue */
+    --dark-primary: #2e86c1; /* Dark Blue */
+    --light-secondary: #58d68d; /* Light Green */
+    --dark-secondary: #27ae60; /* Dark Green */
+    --light-tertiary: #e57373; /* Light Red */
+    --dark-tertiary: #c62828; /* Dark Red */
+    --light-background: #f5f5f5; /* Light Gray */
+    --dark-background: #95a5a6; /* Dark Gray */
+    --highlight-color: #f39c12; /* Highlight Yellow */
+    --muted-color: #95a5a6; /* Muted Gray */
+    --accent-color: #9b59b6; /* Purple */
+    --neutral-color: #7f8c8d; /* Neutral Gray */
+    --neutral-white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('/static/account/images/13_dhans11.jpg');
+    
+}
+
+.main-container{
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    justify-content: center; 
+    align-items: center;
+}
+
+.registration-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30em;
+    /* height: auto; */
+    background-color: var(--neutral-white);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    min-height: 30em;
+}
+
+.registration-header {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('/static/account/images/13_dhans11.jpg') no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    height: 2em;
+    width: 100%;
+    margin-bottom: 2em;
+    border-radius: 10px 10px 0 0;
+}
+
+.registration-form form {
+    margin-top: 0.6em;
+    width: 30em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--neutral-white);
+    border-radius: 10px;
+}
+
+.input-group {
+    margin-bottom: 1em;
+}
+
+
+.field-error{
+
+    position: relative;
+    min-height: 1.7em;
+    background-color: var(--neutral-white);
+    border: 0.1px solid var(--dark-tertiary);
+    border-radius: 4px;
+    margin-top: 0.1em;
+    width: 20em;
+    color: var(--dark-tertiary);  
+    /* display:none; */
+    align-items: center; 
+    margin-top: 0.2em;
+}
+
+
+.alert{
+    width: auto;
+    border: #e66740;
+    color: #1abc9c;
+    margin-bottom: 2em;
+    font-size: larger;
+    font-family: serif;
+}
+
+.alert-hidden {
+    display: none;
+}
+
+
+.error {
+    position: relative;
+    min-height: 2.2em;
+    background-color: var(--neutral-white);
+    border: 0.5px solid var(--dark-tertiary);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    width: 20.5em;
+}
+
+.error p {
+   color: var(--error-color);
+   margin-left: 0.5em;
+}
+
+.field-error{
+    position: relative;
+    min-height: 1.7em;
+    background-color: var(--neutral-white);
+    border: 0.1px solid var(--error-primary);
+    border-radius: 4px;
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.2em;
+    width: 20em;
+    display:none;
+}
+
+.field-text{
+    color: var(--error-color);
+    margin-left: 0.5em;
+}
+
+#close-btn {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    margin-right: 0.5em;
+}
+
+.check-group {
+    width: 20em;
+    text-align: justify;
+    line-height: 0.9em;
+}
+
+.consent-label {
+    font-size: small;
+}
+
+.input-group label {
+    display: block;
+    /* margin-bottom: 0.1em; */
+    font-weight: 400;
+    font-size: 1em;
+}
+
+.input-group input, 
+.pass-input-group input {
+    border: none;
+    border-bottom: 2px solid #3498db;
+    background: transparent;
+    padding: 0 0;
+    font-size: 1em;
+    width: 20em;
+    outline: none;
+}
+
+.input-group input:focus, 
+.pass-input-group input:focus {
+    border-bottom-color: #2980b9;
+}
+
+/* .sub-btn button {
+    margin-top: 1em;
+    width: 24em;
+    height: 4em;
+    background-image: url('/static/account/images/13_dhans11.jpg');
+    color: var(--neutral-white);
+    font-weight: 700;
+    line-break: anywhere;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 2em;
+} */
+
+
+.sub-btn button {
+    margin-top: 1em;
+    width: 24em;
+    height: 4em;
+    background-image: url('/static/account/images/13_dhans11.jpg');
+    color: var(--neutral-white);
+    font-weight: 700;
+    line-break: anywhere;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 2em;
+    transition: background-color 0.2s, transform 0.1s; /* Add smooth transition */
+}
+
+.sub-btn button:active {
+    transform: scale(0.95); /* Simulate button press */
+    background-color: rgba(0, 0, 0, 0.3); /* Optional: Add a semi-transparent overlay for feedback */
+}
+
+
+.signin-text {
+    margin-top: 0.5em;
+    width: 20em;
+    text-align: center;
+    font-size: small;
+}
+
+.pass-input-group {
+    position: relative;
+    width: 20em;
+    /* margin-bottom: 1em; */
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 5%;
+    top: 65%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    width: 24px;
+    height: 23px;
+    background-size: contain;
+}
+
+.toggle-eye::before {
+    content: '';
+    position: absolute;
+    top: 63%;
+    left: 3px;
+    right: 7px;
+    height: 1px;
+    background: #d68080;
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+.show-password .toggle-eye::before {
+    display: none;
+}
+

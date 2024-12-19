@@ -1,0 +1,144 @@
+
+
+{% load static %}
+{% include 'partials/header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/register.css' %}">
+</head>
+<body>
+
+<div class="main-container">
+    <div class="registration-form">
+        <div class="registration-header">
+            <h2>User Registration</h2>
+        </div>
+        
+         
+    <form action="{% url 'user-registration' %}"  method="post">
+         {% csrf_token %}  <!-- Add CSRF token -->
+
+            {% if form.non_field_errors %}
+            <div class="gen-error">
+                <p class="gen-text">{{ form.non_field_errors }}</p>
+            </div>
+            {% endif %}
+       
+            
+            <div class="input-group">
+                <label for="email">Email:</label>
+                {{ form.email }}
+
+                <div class="field-error" id="email-error">
+                    <p class="field-text" id="email-error-text">
+                        {% if form.email.errors %}
+                            {{ form.email.errors.0 }}  {# Show only the first backend error if multiple errors exist #}
+                        {% endif %}
+                    </p>
+                </div>
+                
+            </div>
+            
+
+            <div class="input-group">
+                <label for="first_name">First Name:</label>
+                {{ form.first_name }}
+                <div class="field-error" id="first-error">
+                    <p class="field-text" id="first-error-text">
+                    {% if form.first_name.errors %}
+                    {{ form.first_name.errors.0 }} 
+                    {% endif %}
+                </p>
+                </div>
+                
+            </div>
+        
+            <div class="input-group">
+                <label for="last_name">Last Name:</label>
+                {{ form.last_name }}
+                <div class="field-error" id="last-error">
+                    <p class="field-text" id="last-error-text"> 
+                        {% if form.last_name.errors %}
+                        {{ form.last_name.errors }} 
+                        {% endif %}
+                    </p>
+                </div>
+              
+            </div>
+        
+            <div class="input-group">
+                <label for="mobile">Mobile Number:</label>
+                {{ form.mobile }}
+                <div class="field-error" id="mob-error">
+                    <p class="field-text" id="mob-error-text"> 
+                        {% if form.mobile.errors %}
+                         {{ form.mobile.errors.0 }} 
+                         {% endif %}
+                    </p>
+                </div>  
+            </div>
+
+
+
+            <div class="pass-input-group">
+                <label for="password1">Password:</label>
+                {{ form.password1 }}
+                <span id="toggle-password1" class="toggle-eye">&#128065;</span>
+                <div class="field-error" id="pass1-error">
+                    <p class="field-text" id="pass1-error-text">
+                    {% if form.password1.errors %}
+                     {{ form.password1.errors }} 
+                     {% endif %}
+                    </p>
+                </div>
+            </div>
+            
+
+            <div class="pass-input-group pass2-margin">
+                <label for="password2">Confirm Password:</label>
+                
+                {{ form.password2 }}
+                <span id="toggle-password2" class="toggle-eye" >&#128065;</span>
+                
+                <div class="field-error" id="pass2-error">
+                    <p class="field-text" id="pass2-error-text">
+                        {% if form.password2.errors %}
+                        {{ form.password2.errors }} 
+                        {% endif %}
+                    </p>
+                   
+                </div>
+                
+            </div>
+
+            <div class="check-group">
+                <input type="checkbox" id="dataConsent" class="consent-checkbox" required>
+                <label for="dataConsent" class="consent-label">
+                    I agree to the <a href="/terms">Terms of Service</a> and 
+                    <a href="/privacy">Privacy Policy</a>, and I consent to 
+                    my data being stored in accordance with the site's privacy guidelines.
+                </label>
+            </div>
+        
+            <div class="sub-btn">
+                <button type="submit" id="form-submit">CREATE ACCOUNT</button>
+            </div>
+
+            <div class="signin-text">
+                <p>Have an account? <a href="login-view/" class="signin-link">Sign in</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'account/js/register.js' %}"></script>
+
+</body>
+</html> 
+
+{% include 'partials/footer.html' %}

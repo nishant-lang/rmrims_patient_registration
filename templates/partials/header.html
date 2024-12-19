@@ -1,0 +1,101 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="{% static 'account/css/header.css' %}" />
+
+  </head>
+  <body>
+    <header>
+      <div class="secondary-header">
+        <div class="secondary-header__top">
+
+          <div class="welcome">
+
+            <p>
+              {% if user.is_authenticated %}
+
+               <p>Welcome, {{user.email}}</p>
+
+              {% else %}
+                Welcome Guest
+              {% endif %}
+            </p>
+           
+            <!-- <a href="https://rmrims.org.in/"><img
+              src="/static/logos/rmri new small logo.PNG"
+              alt=""
+              srcset=""
+              height="48px"
+              width="80px"/></a> -->
+          
+           <!-- <a href=""><img
+            src="/static/logos/75__1_-removebg-preview.png"
+            alt=""
+            srcset=""
+            height="48"
+            width="80"/></a>  -->
+            
+          </div>
+            
+            <button
+            class="mobile-nav-toggle"
+            aria-controls="primary-navigation"
+            aria-expanded="false">
+            <!-- <span class="visually-hidden"> Menu </span> -->
+          </button>
+        </div>
+
+
+        <nav class="primary-navigation">
+          <div class="nav-list">
+            <div class="primary-navigation__dropdown">
+              <a href="/">Home</a>
+            </div>
+            <div class="primary-navigation__dropdown">
+              <a href="/#about">About</a>
+            </div>
+
+            <div class="primary-navigation__dropdown">
+              <a href="/#schedule">Schedules</a>
+            </div>
+
+            <div class="primary-navigation__dropdown">
+              <a href="/#venue">Venue</a>
+            </div>
+
+            <div class="primary-navigation__dropdown">
+              <a href="">Register</a>
+            </div>
+
+          {% if user.is_authenticated %}
+           <div class="primary-navigation__dropdown logout-btn" id="logout-btn">
+               <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                   {% csrf_token %}
+                   <button type="submit">
+                       Logout
+                   </button>
+
+               </form>
+           </div>
+       {% endif %}
+       
+          </div>
+        </nav>
+      </div>
+    </header>
+  </body>
+
+  <script src="{% static 'account/js/header.js' %}"></script>
+</html>
+

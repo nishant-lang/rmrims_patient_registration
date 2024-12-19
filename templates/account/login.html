@@ -1,0 +1,83 @@
+
+
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/login.css' %}">
+
+</head>
+<body>
+
+   
+<div class="main-container">
+
+<div class="registration-form">
+    <div class="alert alert-success" role="alert" id="alert-message" {% if messages %} data-has-messages="true" {% endif %}>
+
+        {% if messages %}
+            {% for message in messages %}
+                <span class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</span>
+                {% if not forloop.last %} <br> {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="registration-header">
+        <h2>User Login</h2>
+    </div>
+
+    <!-- <div class="error" id="error-div">
+        <p class="error-text" id="text"></p>
+        <button id="close-btn">&times;</button>
+    </div> -->
+
+
+
+    {% if form.non_field_errors %}
+    <div class="error"  id="error-div">
+        {% for error in form.non_field_errors %}
+            <p class="error-text" id="text" >{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+    <form method="POST" id="login-form" action="{% url 'login-view' %}" > <!-- Replace with your actual login view name -->
+        {% csrf_token %} <!-- CSRF token for security -->
+        
+        <div class="input-group">
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }} <!-- Render the email field -->
+            <div class="field-error" id="email-error">
+                <p class="field-text" id="email-error-text">{{ form.email.errors|join:', ' }}</p> 
+            </div>
+        </div>
+
+        <div class="pass-input-group">
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password}} <!-- Render the password field -->
+            <span id="toggle-password" class="toggle-eye" onclick="togglePasswordVisibility()">&#128065;</span>
+            <div class="field-error" id="pass-error">
+                <p class="field-text" id="pass-error-text">{{ form.password1.errors|join:', ' }}</p> <!-- Show password errors -->
+            </div>
+        </div>
+
+        <div class="sub-btn">
+            <button type="submit" id="form-submit">Login</button>
+        </div>
+    </form>
+</div>
+
+<script src="{% static 'account/js/login.js' %}"></script>
+
+<script>
+        
+
+</script>
+

@@ -1,0 +1,362 @@
+:root {
+  --primary-color: #3498db; /* Blue */
+  --secondary-color: #2ecc71; /* Green */
+  --tertiary-color: #e74c3c; /* Red */
+  --red-color: #f02e2a;
+  --background-color: #ecf0f1; /* Light Gray */
+  --text-color: #2c3e50; /* Dark Gray */
+  --link-color: #1abc9c; /* Teal */
+  --border-color: #bdc3c7; /* Gray */
+  --success-color: #08a54b; /* Success Green */
+  --warning-color: #f39c12; /* Warning Yellow */
+  --error-color: #e74c3c; /* Error Red */
+  --info-color: #3498db; /* Info Blue */
+  --light-primary: #5dade2; /* Light Blue */
+  --error-primary: #add8e6; /* Light Blue */
+  --dark-primary: #2e86c1; /* Dark Blue */
+  --light-secondary: #58d68d; /* Light Green */
+  --dark-secondary: #058239; /* Dark Green */
+  --light-tertiary: #e57373; /* Light Red */
+  --dark-tertiary: #c62828; /* Dark Red */
+  --light-background: #f5f5f5; /* Light Gray */
+  --dark-background: #95a5a6; /* Dark Gray */
+  --highlight-color: #f39c12; /* Highlight Yellow */
+  --muted-color: #95a5a6; /* Muted Gray */
+  --accent-color: #9b59b6; /* Purple */
+  --neutral-color: #7f8c8d; /* Neutral Gray */
+  --neutral-white: #fff;
+  --form-header: #740938;
+  --form-registration: #af1740;
+  --form-area: #cd608f;
+
+
+  --clr-primary-000: white;
+  --clr-primary-010: #ddd;
+  --clr-primary-020: #f2f2f2;
+  --clr-primary-030: green;
+  --clr-primary-040: red;
+  --clr-primary-050: black;
+
+  --clr-primary-100: #1b285c;
+  --clr-primary-150: #504987;
+  --clr-primary-160: #050a30;
+  --clr-primary-170: #6420aa;
+  --clr-primary-180: #2c4e80;
+  --clr-primary-190: #8aa0df;
+  /* --clr-primary-170:#EF7C8E; */
+  --clr-primary-200: #ff6700;
+  --clr-primary-250: #fc4100;
+  --clr-primary-300: #a11000;
+  --clr-primary-330: rgb(228, 52, 52);
+  --clr-primary-350: #ff8532;
+  --clr-primary-400: #006769;
+  --clr-primary-450: #40a578;
+  --clr-primary-480: #26694b;
+  --clr-primary-490: #4ccd99;
+  --clr-primary-500: #717275;
+  --clr-primary-530: #dee2e6;
+  --clr-primary-550: #fff;
+  --clr-primary-600: #f0f8ff;
+  --clr-primary-650: rgb(218, 212, 212);
+  --clr-primary-700: #ffffff;
+  --clr-primary-750: #eaeaea;
+  --clr-primary-800: aliceblue;
+  --clr-primary-850: #5f9fe4;
+  --clr-primary-855: #0fcaf0;
+  --clr-primary-860: #acadb0;
+
+  /* --clr-primary-200:#FF4500; */
+  --clr-primary-150: #504987;
+
+  --clr-neutral-100: hsl(36, 100%, 99%);
+  --clr-neutral-200: hsl(60, 3%, 40%);
+  --clr-neutral-300: hsl(236, 13%, 42%);
+  --clr-neutral-400: hsl(240, 100%, 5%);
+
+  --fw-regular: 400;
+  --fw-semi-bold: 700;
+  --fw-bold: 800;
+
+  --fs-body: var(--size-093);
+  --fs-nav: var(--size-075);
+  --fs-primary-header: var(--size-300);
+  --fs-secondary-header: var(--size-200);
+  --fs-para: var(--size-093);
+
+  --size-025: 0.2rem;
+  --size-050: 0.5rem;
+  --size-075: 0.75rem;
+  --size-093: 0.8rem;
+  --size-100: 1rem;
+  --size-150: 1.5rem;
+  --size-200: 2rem;
+  --size-300: 3rem;
+  --size-350: 3.5rem;
+  --size-400: 4rem;
+  --size-500: 5rem;
+  --size-600: 5rem;
+  --size-700: 7rem;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f9;
+}
+
+#modal {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(237, 200, 200, 0.5); /* Optional backdrop */
+}
+
+.modal-area {
+  height: 27em;
+  width: 27em;
+  z-index: 1000;
+  background-color: rgb(250, 235, 235);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+.modal-header {
+  width: 100%;
+  height: 28px;
+  position: relative;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header button {
+  position: absolute; /* Ensure it floats inside the modal header */
+  right: 10px; /* Adjust for alignment */
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove default button border */
+  font-size: 1.7em; /* Size the button appropriately */
+  color: black; /* Button color */
+  cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+.modal-header button:active {
+  transform: scale(0.85);
+}
+
+.modal-content {
+  height: 86%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 90%;
+}
+.modal-content p {
+  color: var(--dark-secondary);
+}
+
+.modal-footer {
+  /* width: 100%; */
+  /* height: 42px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-footer button {
+  background-color: transparent;
+  height: 2em;
+  width: 5em;
+  border-radius: 2em;
+  color: var(--background-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  background-color: var(--success-color); /* Darker shade for click */
+}
+
+.modal-footer button:active {
+  transform: scale(0.95); /* Button shrink effect on click */
+  background-color: var(--light-secondary);
+}
+
+/* MODAL CODE END */
+
+/* DASHBORD CODE START */
+
+.container {
+  padding: 20px;
+  margin-top: 4em;
+}
+
+.sub-container {
+  display: flex;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  width: auto;
+  /* height:100vh ; */
+  background-color: var(--highlight-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sub-section {
+  margin: 5px;
+  display: flex;
+  align-items: unset;
+  width: 100%;
+  /* background-color: var(--light-secondary); */
+  /* border: 1px solid var(--border-color); */
+  /* border-radius: 10px; */
+  margin-top: 10px;
+}
+
+.patient-number {
+  min-height: 8em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.patient-number-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.patient-number h2 {
+  margin-left: 10px;
+  font-size: large;
+  color: var(--neutral-white);
+  font-family:ui-monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.card {
+  width: 12em;
+  margin: 10px;
+  padding: 20px;
+  /* border-radius: 8px; */
+  text-align: center;
+  font-family: ui-monospace;
+  background-color: var(--neutral-white);
+  box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.3);
+}
+
+.pie-graph{
+  display: flex;
+  width: 98%;
+  height: auto;
+  margin-top: 5px;
+}
+
+
+.pie{
+  margin-top: 5px;
+  margin-left: 5px;
+  display: flex;
+  height: 21em;
+  padding: 10px;
+  background-color: white;
+  /* border: 1px solid var(--dark-background); */
+  /* border-radius: 10px; */
+  box-shadow:  0 4px 8px rgb(0,0,0,0.3);
+  
+}
+
+
+.graph-section {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  width: 340px;
+  height: 340px;
+  /* border: 1px solid var(--border-color); */
+  background-color: var(--highlight-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.year-graph{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:64%;
+  /* border: 1px solid rosybrown; */
+  /* border-radius: 10px; */
+  margin-top: 5px;
+  padding: 10px;
+  background-color: var(--neutral-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.linechart-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 98%;
+  height: 21em;
+  margin: 10px;
+  border-radius: 10px;
+  /* background-color:#1abc9c; */
+}
+
+.linechart-box{
+  width: 64%;
+  height: 21em;
+  /* border: 1px solid var(--neutral-color); */
+  background-color:var(--neutral-white);
+  /* border-radius: 10px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#linechartId{
+  display: block;
+  box-sizing: border-box;
+  height: 319px;
+  width: 639px;
+  padding: 10px;
+}
+
+.agvchart{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 354px;
+  height: 21em;
+  background-color: var(--neutral-white);
+  /* border-radius: 10px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  
+}
+#avgAgeChart{
+  display: block;
+  box-sizing: border-box;
+  height: 230px;
+  width: 354px;
+  padding: 10px;
+
+}
+/* DASHBORD CODE END */

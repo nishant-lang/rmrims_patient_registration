@@ -1,0 +1,123 @@
+{% load static %}
+{% include 'partials/header.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="{% static 'account/css/dashbord.css' %}">
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+  <title>Dashbord</title>
+</head>
+<body>
+    
+<!-- MODAL START-->
+{% if messages %}
+<div class="modal-container" id="modal">
+   <div class="modal-area">
+     
+     <div class="modal-header">
+       <button class="close-button" id="modl-header-btn">×</button>
+       <p></p>
+     </div>
+     <div class="modal-content">
+       <img src="{% static 'account/logo/success_tick.png' %}" alt="Success">
+
+       <ul>
+       {% for message in messages %}
+          <p>{{ message }}</p> 
+       {% endfor %}
+       </ul>
+  
+     </div>
+     <div class="modal-footer">
+       <button id="modl-foot-btn">Okay</button>
+     </div>
+   </div>
+ </div>
+ {% endif %}
+ 
+ <!-- MODAL END-->
+
+
+<!-- DASHBORD CODE START -->
+
+    <div class="container">
+      <div class="sub-container">
+        <!-- Total Patients Overview -->
+        <div class="section">
+          <div class="sub-section">
+          <div class="patient-number">
+            <h2>Total Patients Overview</h2>
+          <div class="patient-number-head">
+            <div class="card">Total Patients <br>500</div>
+            <div class="card">Male Patients <br> 200</div>
+            <div class="card">Female Patients <br> 150</div>
+            <div class="card">Other Gender <br> 50</div>
+          </div>
+        </div>
+     
+      </div>
+
+
+      <div class="pie-graph">
+
+    
+      <!-- <div class="graph-section"> -->
+         <div class="year-graph">
+          <div id="years" style="display: none;">{{ years|safe }}</div>
+          <div id="growth" style="display: none;">{{ growth|safe }}</div>
+          <canvas id="patientGrowthChart"></canvas>
+         </div>
+      <!-- </div> -->
+
+      <div class="pie">
+        <div id="department" style="display: none;">{{ department|safe }}</div>
+          <div id="patient_count" style="display: none;">{{ patient_count|safe }}</div>
+        <canvas id="departmentChart" ></canvas>
+      </div>
+
+    </div>
+
+
+
+    <div class="linechart-container">
+
+
+      
+    <div class="agvchart">
+      <div id="departments" style="display: none;">{{ departments|json_script:"departments-data" }}</div>
+      <div id="ages" style="display: none;">{{ ages|json_script:"ages-data" }}</div>
+      <canvas id="avgAgeChart"></canvas>
+  </div>
+    <div class="linechart-box">
+      <div id="months" style="display: none;">{{months|json_script:"months-data" }}</div>
+        <div id="counts" style="display: none;">{{ counts|json_script:"counts-data" }}</div>
+      <canvas id="linechartId"></canvas>
+    </div>
+ 
+
+    </div>
+
+
+    </div>
+
+   
+
+  </div>
+  
+</div>
+
+<!-- DASHBORD CODE END -->
+  </body>
+
+
+  
+  {% include 'partials/footer.html' %}
+<script src="{% static 'account/js/dashbord.js' %}"></script> 
+</html>
