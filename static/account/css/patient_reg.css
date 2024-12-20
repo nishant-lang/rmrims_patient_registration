@@ -103,22 +103,23 @@
 
 /* Base styles */
 
-body {
+/* body {
     font-family: Arial, sans-serif;
+    
     margin: 0;
     padding: 0;
     background-color: #f4f6f9;
-  }
+  } */
 
 
 /* Main container */
 
 .main-container {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     background-color:var(--background-color);
-    margin-top:3em;
+    margin-top:4em;
     font-family: monospace,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -128,10 +129,11 @@ body {
     flex-direction: column;
     align-items: center;
     /* background-color:var(--form-area); */
-    background-color:var(--light-tertiary);
+    /* background-color:var(--light-tertiary); */
+    background-image: url(/static/account/images/13_dhans11.jpg);
     width: 100vw;
-    margin-top: 1em;
-    min-height: auto;
+    /* margin-top: 1em; */
+    min-height: 100vh;
 }
 
 .form-header{
@@ -149,7 +151,6 @@ body {
     height: auto;
     display: flex;
 }
-
 
 
 .header-items img{
@@ -175,7 +176,6 @@ font-family:monospace,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 color: white;
 text-shadow: #333;
 }
-
 
 
 .form-errors {
@@ -239,8 +239,6 @@ text-shadow: #333;
     align-items: baseline;
     width: 100%;
 }
-
-
 
 .personal-info{
     /* width: 25%; */
@@ -323,6 +321,7 @@ text-shadow: #333;
 
 .form-sub{
     margin-top: 10px;
+    margin-bottom: 10px;
     width: 100%;;
     display: flex;
     flex-direction: column;
@@ -396,7 +395,6 @@ textarea {
 .consent-label {
     font-size: 14px;
 }
-
 
 /* Sign-in link and text */
 .signin-text {
@@ -476,7 +474,6 @@ textarea {
     display: flex;
     align-items:flex-start;
    
-
 }
 
 .input-group label p {
@@ -560,6 +557,7 @@ textarea {
   width: 100%;
   height: 90%;
 }
+
 .modal-content p{
   color: var(--dark-secondary);
 }
@@ -583,11 +581,33 @@ textarea {
   background-color: var(--success-color); /* Darker shade for click */
 }
 
-
 .modal-footer button:active {
   transform: scale(0.95); /* Button shrink effect on click */
   background-color: var(--light-secondary);
 }
+
+
+/* Ensure the body and html fill the entire viewport */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* The wrapper holds the content, pushing the footer to the bottom */
+.content-wrapper {
+
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* The main container grows to take up the available space */
+.main-container {
+    flex: 1;
+}
+
+
 
 /* MODAL CODE END */
 
@@ -639,7 +659,7 @@ textarea {
         align-items: center;
         background-color: var(--light-tertiary);
         width: 100%;
-        margin-top: 1.7em;
+        margin-top:.7em;
         min-height: 100vh;
     }
 
@@ -680,12 +700,9 @@ textarea {
         border-radius: 0px 40px;
     }
 
-    
-
 }
 
 @media screen and (max-width: 496px) {
-
 
     .header-items {
         width: 98%;
@@ -744,7 +761,7 @@ textarea {
         align-items: center;
         background-color: var(--light-tertiary);
         width: 100%;
-        margin-top: 1.7em;
+        margin-top:.7em;
         min-height: 100vh;
     }
 
