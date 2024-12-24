@@ -95,14 +95,33 @@
     width: auto;
   }
   
+  .desigin p{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13.5px;
+  }
+
   .copy-rights {
+    
+    /* color: var(--clr-primary-000);
+    font-weight: 400;
+    font-size: 14px;
+    width: auto; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: var(--clr-primary-000);
     font-weight: 400;
-    /* margin-left: 150px; */
     font-size: 14px;
     width: auto;
   }
 
+
+  .copy-rights p{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13.5px;
+  }
 
   /* Footer styles */
 /* footer {

@@ -109,10 +109,7 @@ def patient_age_per_department():
         for item in department_avg_ages
     ]
 
-
     return departments,ages
-
-
 
 
 

@@ -26,10 +26,6 @@
     --form-registration: #dd5a21; /* Dark Red */
     --red-color:#f63c3c;
 
-
-
-
-
     --clr-primary-000: white;
     --clr-primary-010: #ddd;
     --clr-primary-020: #f2f2f2;
@@ -82,6 +78,7 @@
     --fs-primary-header: var(--size-300);
     --fs-secondary-header: var(--size-200);
     --fs-para: var(--size-093);
+    --form-header:#1e7787;
   
     --size-025: 0.2rem;
     --size-050: 0.5rem;
@@ -132,15 +129,16 @@
     /* background-color:var(--light-tertiary); */
     background-image: url(/static/account/images/13_dhans11.jpg);
     width: 100vw;
-    /* margin-top: 1em; */
+    margin-top: 1.8em;
     min-height: 100vh;
 }
 
 .form-header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--form-registration);
+    display:contents;
+    /* align-items: center;
+    justify-content: center;  */
+    /* background-color: var(--clr-primary-400); */
+    /* background-color:#21446cfc; */
     width: 100%;
     height: auto;
     margin-bottom: 1.5em;
@@ -166,6 +164,7 @@
 
 .head-text{
     width: 100%;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,7 +192,6 @@ text-shadow: #333;
 
 .form-errors p{
     margin-left: 5px;
-
 }
 
 .form-error-btn button{
@@ -369,7 +367,7 @@ textarea {
 }
 
 /* Submit button styling */
-.sub-btn button {
+/* .sub-btn button {
     background-color:var(--form-registration);
     color: white;
     padding: 12px 20px;
@@ -377,11 +375,9 @@ textarea {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-}
+} */
 
-.sub-btn button:hover {
-    background-color:var(--error-color);
-}
+
 
 /* Terms and privacy checkbox group */
 .check-group {
@@ -452,8 +448,8 @@ textarea {
 .sub-btn button {
     width: 20em;
     height: 3em;
-    /* background-image: url(/static/account/images/13_dhans11.jpg); */
-    background-image:var(--form-header);
+    background-image: url(/static/account/images/13_dhans11.jpg);
+    /* background-image:var(--form-header); */
     color: var(--neutral-white);
     font-weight: 700;
     line-break: anywhere;
@@ -462,6 +458,10 @@ textarea {
     margin-bottom: 3em;
     transition: background-color 0.2s, transform 0.1s;
 }
+
+/* .sub-btn button:hover {
+    background-color:var(--error-color);
+} */
 
 .sub-btn button:active {
     transform: scale(0.95); /* Simulate button press */
@@ -659,7 +659,7 @@ html, body {
         align-items: center;
         background-color: var(--light-tertiary);
         width: 100%;
-        margin-top:.7em;
+        margin-top:2.8em;
         min-height: 100vh;
     }
 
@@ -753,6 +753,7 @@ html, body {
 }
 
 
+
 @media screen and (max-width: 365px) {
 
     .form-cls {
@@ -761,7 +762,7 @@ html, body {
         align-items: center;
         background-color: var(--light-tertiary);
         width: 100%;
-        margin-top:.7em;
+        margin-top:1.8em;
         min-height: 100vh;
     }
 
@@ -816,7 +817,7 @@ html, body {
         transition: background-color 0.2s, transform 0.1s;
     }
 
-    .form-cls {
+    /* .form-cls {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -824,5 +825,5 @@ html, body {
         width: 100%;
         margin-top: 2.4em;
         min-height: 100vh;
-    }
+    } */
 }

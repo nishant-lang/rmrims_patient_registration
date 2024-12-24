@@ -25,10 +25,9 @@
   --accent-color: #9b59b6; /* Purple */
   --neutral-color: #7f8c8d; /* Neutral Gray */
   --neutral-white: #fff;
-  --form-header: #740938;
+  --form-header: #1e7787;
   --form-registration: #af1740;
   --form-area: #cd608f;
-
 
   --clr-primary-000: white;
   --clr-primary-010: #ddd;
@@ -211,6 +210,8 @@ body {
 
 .sub-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .section {
@@ -218,6 +219,8 @@ body {
   flex-direction: column;
   align-items:center;
   width: auto;
+  margin-top: 2em;
+  width: 100vw;
   /* height:100vh ; */
   background-color: var(--highlight-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -303,7 +306,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width:64%;
+  width:68%;
   /* border: 1px solid rosybrown; */
   /* border-radius: 10px; */
   margin-top: 5px;
@@ -324,11 +327,11 @@ body {
 }
 
 .linechart-box{
+  display: flex;
+  justify-content: center;
   width: 64%;
   height: 21em;
-  /* border: 1px solid var(--neutral-color); */
   background-color:var(--neutral-white);
-  /* border-radius: 10px; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
