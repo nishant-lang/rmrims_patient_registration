@@ -150,3 +150,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     'https://222a-14-139-216-7.ngrok-free.app',
 ]
+
+""" logout the user after 1 hour even if they don’t close the browser"""
+SESSION_COOKIE_AGE = 3600  # 1 hour (3600 seconds)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

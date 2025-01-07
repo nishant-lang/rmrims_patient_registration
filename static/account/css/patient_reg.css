@@ -449,7 +449,6 @@ textarea {
     width: 20em;
     height: 3em;
     background-image: url(/static/account/images/13_dhans11.jpg);
-    /* background-image:var(--form-header); */
     color: var(--neutral-white);
     font-weight: 700;
     line-break: anywhere;
@@ -459,11 +458,9 @@ textarea {
     transition: background-color 0.2s, transform 0.1s;
 }
 
-/* .sub-btn button:hover {
-    background-color:var(--error-color);
-} */
 
-.sub-btn button:active {
+
+.back-btn button a:active {
     transform: scale(0.95); /* Simulate button press */
     background-color: rgba(0, 0, 0, 0.3); /* Optional: Add a semi-transparent overlay for feedback */
 }
@@ -659,7 +656,7 @@ html, body {
         align-items: center;
         background-color: var(--light-tertiary);
         width: 100%;
-        margin-top:2.8em;
+        margin-top:1.8em;
         min-height: 100vh;
     }
 

@@ -28,6 +28,7 @@
   --form-header: #1e7787;
   --form-registration: #af1740;
   --form-area: #cd608f;
+  --text-black: #747071;
 
   --clr-primary-000: white;
   --clr-primary-010: #ddd;
@@ -201,11 +202,35 @@ body {
 
 /* MODAL CODE END */
 
+
+
+.back-btn a {
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 9px;
+}
+
+.back-btn a:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.sub-btn button:active {
+  transform: scale(0.95); /* Simulate button press */
+  background-color: rgba(0, 0, 0, 0.3); /* Optional: Add a semi-transparent overlay for feedback */
+}
+
 /* DASHBORD CODE START */
 
 .container {
   padding: 20px;
   margin-top: 4em;
+  width: 97%;
 }
 
 .sub-container {
@@ -217,11 +242,11 @@ body {
 .section {
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   width: auto;
-  margin-top: 2em;
-  width: 100vw;
-  /* height:100vh ; */
+  margin-top: 0.2em;
+  width: 100%;
+  height:auto ;
   background-color: var(--highlight-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -231,9 +256,6 @@ body {
   display: flex;
   align-items: unset;
   width: 100%;
-  /* background-color: var(--light-secondary); */
-  /* border: 1px solid var(--border-color); */
-  /* border-radius: 10px; */
   margin-top: 10px;
 }
 
@@ -255,7 +277,9 @@ body {
   margin-left: 10px;
   font-size: large;
   color: var(--neutral-white);
-  font-family:ui-monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: ui-monospace, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 .card {
@@ -269,26 +293,48 @@ body {
   box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.3);
 }
 
-.pie-graph{
+.pie-graph {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 98%;
-  height: auto;
-  margin-top: 5px;
-}
-
-
-.pie{
-  margin-top: 5px;
-  margin-left: 5px;
-  display: flex;
   height: 21em;
-  padding: 10px;
-  background-color: white;
-  /* border: 1px solid var(--dark-background); */
-  /* border-radius: 10px; */
-  box-shadow:  0 4px 8px rgb(0,0,0,0.3);
-  
+  margin-top: 5px;
 }
+/* 
+.pie {
+  margin-top: 5px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: white;
+  width: 30%;
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.3);
+} */
+
+.pie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32%;
+  height: 21em;
+  margin-left: 10px;
+  background-color: var(--neutral-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+
+#pie_chart{
+  /* display: block;
+  box-sizing: border-box;
+  height: 319px;
+  width: 639px; */
+  padding: 10px;
+
+}
+
 
 
 .graph-section {
@@ -299,43 +345,46 @@ body {
   height: 340px;
   /* border: 1px solid var(--border-color); */
   background-color: var(--highlight-color);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.year-graph{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width:68%;
-  /* border: 1px solid rosybrown; */
-  /* border-radius: 10px; */
-  margin-top: 5px;
-  padding: 10px;
-  background-color: var(--neutral-white);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
 
-.linechart-container{
+.year-graph {
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    width: 68%;
+    height: 21em;
+    background-color: var(--neutral-white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3)
+  }
+  
+
+  #patientGrowthChart{
+    padding: 10px;
+  }
+
+.linechart-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 98%;
   height: 21em;
   margin: 10px;
-  border-radius: 10px;
-  /* background-color:#1abc9c; */
+
 }
 
-.linechart-box{
+.linechart-box {
   display: flex;
   justify-content: center;
-  width: 64%;
+  align-items: center;
+  width: 68%;
   height: 21em;
-  background-color:var(--neutral-white);
+  background-color: var(--neutral-white);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-#linechartId{
+#linechartId {
   display: block;
   box-sizing: border-box;
   height: 319px;
@@ -343,23 +392,168 @@ body {
   padding: 10px;
 }
 
-.agvchart{
+.agvchart {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 354px;
+  width: 32%;
   height: 21em;
+  margin-right: 10px;
   background-color: var(--neutral-white);
-  /* border-radius: 10px; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  
 }
-#avgAgeChart{
+
+#avgAgeChart {
   display: block;
   box-sizing: border-box;
   height: 230px;
   width: 354px;
   padding: 10px;
+}
+
+.footer{
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
+
+
 /* DASHBORD CODE END */
+
+@media (max-width: 1100px) {
+
+ 
+  .year-graph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 21em;
+    background-color: var(--neutral-white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+  .pie-graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%;
+    height: auto;
+    margin-top: 5px;
+}
+
+.pie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+  height: 21em;
+  margin-left: 0;
+  background-color: var(--neutral-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.linechart-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 98%;
+  height: auto;
+  margin: 10px;
+}
+
+.linechart-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 21em;
+  margin-top: 10px;
+  background-color: var(--neutral-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.agvchart {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 21em;
+  margin-right: 0;
+  background-color: var(--neutral-white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+ 
+  padding:0;
+  margin-top: 5.3em;
+  width: auto;
+
+}
+
+
+} 
+
+@media (max-width: 461px) {
+
+  /* #patientGrowthChart {
+    display: block;
+    box-sizing: border-box;
+    height: 205px;
+    width: 322px;
+  }
+   */
+  .pie-graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    height: auto;
+    margin-top: 5px;
+}
+
+.patient-number {
+  min-height: 8em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+   
+  .patient-number-head {
+    display: flex;
+    width: 96%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card {
+    width: 86%;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    font-family: ui-monospace;
+    background-color: var(--neutral-white);
+    box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.3);
+}
+
+.linechart-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 95%;
+  height: auto;
+  margin: 10px;
+}
+
+
+
+}
+

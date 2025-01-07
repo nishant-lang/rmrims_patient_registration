@@ -153,7 +153,8 @@ color: azure;
 
   /* color: rgb(112, 112, 241); */
   /* color: var(--clr-primary-180); */
-  color: var(--clr-gray-100);
+  /* color: var(--clr-gray-100); */
+  color: var(--clr-primary-450);
 }
 
 /* Mobile Navigation */
@@ -165,7 +166,7 @@ background: transparent;
 }
 
 
-@media (max-width: 922px) {
+@media (max-width: 1066px) {
 
 
 .secondary-header {

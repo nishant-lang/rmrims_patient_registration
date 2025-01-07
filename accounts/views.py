@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm,UserLoginForm,PatientRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
-from accounts.utils import get_patient_growth_data,get_department_patient_data,patient_age_per_department,get_patient_data_per_month
+from accounts.utils import get_patient_growth_data,get_department_patient_data,patient_age_per_department,get_patient_data_per_month,patient_statistics
 
 
 def registration_view(request):
@@ -72,6 +72,8 @@ def patient_register_view(request):
 
 def patient_dashbord(request):
 
+    total_patients,total_male,total_female,total_other= patient_statistics()
+
     years, patient_growth = get_patient_growth_data()
 
     department, patient_count = get_department_patient_data()
@@ -81,6 +83,12 @@ def patient_dashbord(request):
     months,counts=get_patient_data_per_month()
 
     return render(request,'account/dashbord.html',{
+
+        'total_patients':total_patients,
+        'total_male':total_male,
+        'total_female':total_female,
+        'total_other':total_other,
+        
         'years': years,
         'growth': patient_growth,
         'department':department,
@@ -89,5 +97,4 @@ def patient_dashbord(request):
         'ages':ages,
         'months':months,
         'counts':counts
-
     })

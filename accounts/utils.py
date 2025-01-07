@@ -39,7 +39,7 @@ class Utils:
         #     # You might want to raise the exception or log it based on your application's needs
 
 
-# BAR CHART 
+""""BAR CHART  CODE START""" 
 
 def get_patient_growth_data():
     # Fetch and annotate data based on appointment year
@@ -56,7 +56,7 @@ def get_patient_growth_data():
 
     if total_number_year>=mx_of_year:
 
-        print('if part runed....')
+        # print('if part runed....')
         start_year_from=total_number_year-mx_of_year
 
         # Prepare the data for charts
@@ -66,39 +66,40 @@ def get_patient_growth_data():
         return years, patient_growth
     
     else:
-        print('else part runed.....')
+        # print('else part runed.....')
         years = [entry['year'] for entry in patients_by_years]
         patient_growth = [entry['total_patients'] for entry in patients_by_years]
 
         return years, patient_growth
 
+""""BAR CHART  CODE END""" 
+
+""""PIE CHART  CODE START""" 
 def get_department_patient_data():
 
     # Query to group patients by department and count them.
-   
+
     department_data = PatientRegistration.objects.values('department')\
         .annotate(patient_count=Count('id'))\
         .order_by('department')
-    
-     # Map department codes to their human-readable names
-    # department_labels = dict(PatientRegistration.DEPARTMENTS)
- 
-    
+        
     # Prepare the labels and data arrays
     department = [[entry['department']] for entry in department_data]
     patient_count = [entry['patient_count'] for entry in department_data]
-
-    print(department)
-    print(patient_count)
     
+    print('department:', department)
+    print('patient_count:',patient_count )
+
     return department, patient_count
 
+""""PIE CHART  CODE END""" 
 
+"""HORIZONTAL CHART  CODE START"""
 def patient_age_per_department():
-
     department_avg_ages=PatientRegistration.objects.values('department').annotate(avg_age=Avg('age')).order_by('department')
 
-    print(department_avg_ages)
+    # print(department_avg_ages)
+    
 # Prepare data for return
     departments = [
         item['department']  # Directly use the department name
@@ -111,13 +112,15 @@ def patient_age_per_department():
 
     return departments,ages
 
+"""HORIZONTAL CHART  CODE END"""
 
+
+
+"""LINE CHART  CODE START"""
 
 def get_patient_data_per_month():
     # Get the current year
     current_year = datetime.now().year
-
-    print(f'current year {current_year}')
 
     # Query to count patients registered per month for the current year
     patient_data = (
@@ -127,7 +130,6 @@ def get_patient_data_per_month():
         .annotate(count=Count('id'))
         .order_by('month')
     )
-
     # Prepare data for the frontend
     months = []
     counts = []
@@ -139,9 +141,35 @@ def get_patient_data_per_month():
             months.append('Unknown')  # Handle cases where `month` is None
             counts.append(0)
 
-    # Debugging output (optional, remove in production)
-    print(months)
-    print(counts)
-
     # Return the data as a tuple
     return months, counts
+
+"""LINE CHART CODE END"""
+
+
+"""PATIENT STATISTICS START"""
+
+
+def patient_statistics():
+
+    total_patients = PatientRegistration.objects.count()
+    gender_counts = PatientRegistration.objects.values('gender').annotate(count=Count('gender'))
+
+    # Prepare gender-specific counts
+    gender_stats = {item['gender']: item['count'] for item in gender_counts}
+
+    total_male = gender_stats.get('MALE', 0)
+    total_female = gender_stats.get('FEMALE', 0)
+    total_other = gender_stats.get('OTHER', 0)
+    total_prefer_not_to_say = gender_stats.get('PREFER_NOT_TO_SAY', 0)
+
+    # context = {
+    #     'total_patients': total_patients,
+    #     'total_male': total_male,
+    #     'total_female': total_female,
+    #     'total_other': total_other,
+    #     'total_prefer_not_to_say': total_prefer_not_to_say,
+    # }
+    return total_patients,total_male,total_female,total_other
+
+"""PATIENT STATISTICS END"""

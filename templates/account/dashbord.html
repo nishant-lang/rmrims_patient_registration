@@ -11,6 +11,8 @@
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
   <title>Dashbord</title>
 </head>
@@ -47,18 +49,28 @@
 
 <!-- DASHBORD CODE START -->
 
-    <div class="container">
+<div class="container">
+      
+<div class="back-btn">
+  <a href="/patient-registration/"> 
+      <i class="fas fa-arrow-left"></i> <!-- Font Awesome left arrow -->
+  </a>
+</div>
+
+
+
       <div class="sub-container">
+        
         <!-- Total Patients Overview -->
         <div class="section">
           <div class="sub-section">
           <div class="patient-number">
             <h2>Total Patients Overview</h2>
           <div class="patient-number-head">
-            <div class="card">Total Patients <br>500</div>
-            <div class="card">Male Patients <br> 200</div>
-            <div class="card">Female Patients <br> 150</div>
-            <div class="card">Other Gender <br> 50</div>
+            <div class="card">Total Patients <br>{{total_patients}}</div>
+            <div class="card">Male Patients <br> {{total_male}}</div>
+            <div class="card">Female Patients <br>{{total_female}}</div>
+            <div class="card">Other Gender <br>{{total_other}}</div>
           </div>
         </div>
      
@@ -78,7 +90,7 @@
       <div class="pie">
         <div id="department" style="display: none;">{{ department|safe }}</div>
           <div id="patient_count" style="display: none;">{{ patient_count|safe }}</div>
-        <canvas id="departmentChart" ></canvas>
+        <canvas id="pie_chart" ></canvas>
       </div>
 
     </div>
@@ -89,7 +101,7 @@
     <div class="agvchart">
       <div id="departments" style="display: none;">{{ departments|json_script:"departments-data" }}</div>
       <div id="ages" style="display: none;">{{ ages|json_script:"ages-data" }}</div>
-      <canvas id="avgAgeChart"></canvas>
+      <canvas id="avgAgeChart" height="200px"></canvas>
   </div>
     <div class="linechart-box">
       <div id="months" style="display: none;">{{months|json_script:"months-data" }}</div>
@@ -107,13 +119,21 @@
 
   </div>
   
+ 
+ 
+ 
 </div>
 
-<!-- DASHBORD CODE END -->
-  </body>
+<div class="footer">
+  {% include 'partials/footer.html' %}
+</div>
+
 
 
   
-  {% include 'partials/footer.html' %}
+<!-- DASHBORD CODE END -->
+  </body>
+  
+
 <script src="{% static 'account/js/dashbord.js' %}"></script> 
 </html>

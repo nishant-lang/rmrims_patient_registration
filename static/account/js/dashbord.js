@@ -90,99 +90,6 @@ const patientGrowthChart = new Chart(barCtx, {
 });
 
 
-//PIR CHART CODE START
-
-const department = document.getElementById('department').innerText;
-const patient_count = document.getElementById('patient_count').innerText;
-
-// Convert department string into an array
-const departmentArray = department.replace(/[\[\]']+/g, '').split(',').map(item => item.trim());
-
-// Convert patient count string into an array of integers
-const patientCountArray = patient_count.split(',').map(item => {
-    const parsedValue = parseInt(item.trim(), 10);
-    if (isNaN(parsedValue)) {
-        console.log(`Invalid value: ${item}`);  // Check which value is invalid
-        return 0;  // Handle invalid value, or set a default value
-    }
-    return parsedValue;
-});
-
-const pieCtx = document.getElementById('departmentChart').getContext('2d');
-
-// Calculate the total patient count
-const totalPatients = patientCountArray.reduce((sum, val) => sum + val, 0);
-
-const chart = new Chart(pieCtx, {
-    type: 'pie',
-    data: {
-        labels: departmentArray,
-        datasets: [{
-            data: patientCountArray,
-            backgroundColor: [
-                '#FF6384', '#36A2EB', '#FFCE56', '#EB5B00', '#9966FF', '#4BC0C0'
-            ],
-            hoverOffset: 4
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                position: 'right',
-                labels: {
-                    boxWidth: 30,
-                    padding: 5,
-                    font: {
-                        size:8.7,
-                        weight: 'bold',
-                        family: 'Arial, sans-serif',  // Specify the font family here
-                    },
-                    // Add percentage to legend labels
-                    generateLabels: function(chart) {
-                        const data = chart.data;
-                        return data.labels.map(function(label, i) {
-                            const percentage = ((data.datasets[0].data[i] / totalPatients) * 100).toFixed(1) + '%';
-                            return {
-                                text: `${label} (${percentage})`,  // Append percentage to the label
-                                fillStyle: data.datasets[0].backgroundColor[i],
-                                strokeStyle: data.datasets[0].backgroundColor[i],
-                                lineWidth: 1
-                            };
-                        });
-                    }
-                }
-            },
-            title: {
-                display: true,
-                text: 'Patient Distribution (2023-2024)',
-                font: {
-                    size: 16,
-                    weight: 'bold',
-                },
-                color: 'black',
-                position: 'top',
-                padding: {
-                    top: 10,
-                    bottom: 20
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        const value = tooltipItem.raw;
-                        const percentage = ((value / totalPatients) * 100).toFixed(1) + '%';
-                        return tooltipItem.label + ': ' + percentage;
-                    }
-                }
-            }
-        }
-    },
-    plugins: []  // Completely remove ChartDataLabels plugin to avoid any label inside the slice
-});
-
-
-// PIE CODE END
-
 
 //AVG CHART CODE START 
 
@@ -190,8 +97,8 @@ const departments = JSON.parse(document.getElementById('departments-data').textC
 const ages = JSON.parse(document.getElementById('ages-data').textContent);
 
 
-console.log('Departments:', departments);
-console.log('Ages:', ages);
+// console.log('Departments:', departments);
+// console.log('Ages:', ages);
 
 // Create gradient for the bars
 
@@ -211,6 +118,15 @@ const avgAgeChart = new Chart(ctx, {
             borderWidth: 1
         }]
     },
+
+    font: {
+        size: 14,
+        family: 'Arial',
+        weight:'bold' 
+     
+    },
+
+    
     options: {
         responsive: true,
         indexAxis: 'y', // This makes the chart horizontal
@@ -227,8 +143,11 @@ const avgAgeChart = new Chart(ctx, {
                 ticks: {
                     color:'black',
                     font: {
-                        size: 10,
-                        weight:'700'
+                   
+                        size:8.7,
+                        weight: 'bold',
+                        family: 'monospace, sans-serif',
+                        
                     }
                 }
             }
@@ -236,6 +155,8 @@ const avgAgeChart = new Chart(ctx, {
     }
 });
 //AVG CHART CODE END
+
+
 
 
 //LINE CHART CODE START
@@ -249,15 +170,7 @@ const avgAgeChart = new Chart(ctx, {
  console.log('counts: ',counts)
 
 
-//  const Utils = {
-//     months: function ({ count }) {
-//       const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-//       return monthNames.slice(0, count);
-//     }
-//   };
 
-  // Define labels and data
-//   const labels = Utils.months({ count: 7 });
 
   const data = {
     labels: months,
@@ -280,10 +193,10 @@ const avgAgeChart = new Chart(ctx, {
         legend: {
           position: 'top',
         },
-        title: {
-          display: true,
-          text: 'Sample Chart'
-        }
+        // title: {
+        //   display: true,
+        //   text: 'Sample Chart'
+        // }
       }
     }
   };
@@ -295,5 +208,117 @@ const avgAgeChart = new Chart(ctx, {
   );
 
 //LINE SHART CODE END
+
+
+
+//PIE CHART CODE START
+
+const department = document.getElementById('department').innerText;
+const patient_count = document.getElementById('patient_count').innerText;
+
+console.log('Raw patient_count:', patient_count);
+
+
+
+//Convert department string into an array
+const departmentArray = department.replace(/[\[\]']+/g, '').split(',').map(item => item.trim());
+
+
+// const cleanedPatientCount = patient_count.trim().replace(/\s+/g, ''); // Remove any spaces within the string
+
+// Assuming patient_count is a string like "[4, 2, 4]"
+const patientCountArray = patient_count
+  .replace(/[\[\]']+/g, '') // Remove brackets and quotes
+  .split(',') // Split by commas
+  .map(item => {
+    const parsedValue = parseInt(item.trim(), 10); // Explicitly specify radix 10
+    if (isNaN(parsedValue)) {
+      console.log(`Invalid value: ${item}`); // Check which value is invalid
+      return 0; // Handle invalid value, or set a default value
+    }
+    return parsedValue;
+  });
+
+console.log('patientCountArray:', patientCountArray);
+
+
+// Calculate the total patient count
+const totalPatients = patientCountArray.reduce((sum, val) => sum + val, 0);
+
+
+const pieCtx = document.getElementById('pie_chart').getContext('2d');
+const chart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: departmentArray,
+        datasets: [{
+            data: patientCountArray,
+            backgroundColor: [
+                '#FF6384', '#36A2EB', '#FFCE56', '#EB5B00', '#9966FF', '#4BC0C0'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: {
+                    boxWidth: 30,
+                    padding: 5,
+                    font: {
+                        size:8.5,
+                        weight: 'bold',
+                        family: 'monospace, sans-serif',  // Specify the font family here
+                    },
+                    // Add percentage to legend labels
+                    generateLabels: function(chart) {
+                        const data = chart.data;
+                        return data.labels.map(function(label, i) {
+                            const percentage = ((data.datasets[0].data[i] / totalPatients) * 100).toFixed(1) + '%';
+                            return {
+                                text: `${label} (${percentage})`,  // Append percentage to the label
+                                fillStyle: data.datasets[0].backgroundColor[i],
+                                strokeStyle: data.datasets[0].backgroundColor[i],
+                                lineWidth: 1
+                            };
+                        });
+                    }
+                }
+            },
+            title: {
+                display: true,
+                text: 'Patient Distribution',
+            
+                font: {
+                    size: 14,
+                    family: 'Arial', 
+                 
+                },
+                color: '#747071',
+                position: 'top',
+                
+                padding: {
+                    top: 10,
+                    bottom: 20
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const value = tooltipItem.raw;
+                        const percentage = ((value / totalPatients) * 100).toFixed(1) + '%';
+                        return tooltipItem.label + ': ' + percentage;
+                    }
+                }
+            }
+        }
+    },
+    plugins: []  // Completely remove ChartDataLabels plugin to avoid any label inside the slice
+});
+
+
+// PIE CODE END
+
 
 // GRAPH CODE END
