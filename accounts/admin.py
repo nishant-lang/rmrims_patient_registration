@@ -20,17 +20,45 @@ class CustomUserAdmin(admin.ModelAdmin):
 from django.contrib import admin
 from .models import PatientRegistration, State, District
 
+import pandas as pd
+from reportlab.pdfgen import canvas
+from django.contrib import admin
+from django.http import HttpResponse
+from accounts.models import PatientRegistration
 
 
 class PatientRegistrationAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'gender','age','state', 'district', 'department','appointment_date','contact_number','aadhar_number','registered_by','registration_date_time')
+
+    list_display = ('name', 'gender', 'age', 'department', 'consultation_type', 'state', 'district', 'appointment_date', 'registered_by')
     
+    list_filter = ('gender', 'department', 'consultation_type', 'state')  # Add filters
+
     search_fields = ('name', 'last_name')
 
     class Media:
         js = ('account/js/custom.js',)  # Inject custom JavaScript for dynamic functionality
 
+
+
+    # Action to export to Excel
+    @admin.action(description="Export to Excel")
+    def export_to_excel(self, request, queryset):
+        data = queryset.values('name', 'gender', 'age', 'department', 'consultation_type', 'state__name', 'district__name', 'appointment_date', 'registered_by')
+        df = pd.DataFrame(data)
+        df.rename(columns={
+            'state__name': 'State',
+            'district__name': 'District',
+            'registered_by__username': 'Registered By'
+        }, inplace=True)
+
+        # Generate Excel response
+        response = HttpResponse(content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="patients_data.xlsx"'
+        df.to_excel(response, index=False, engine='openpyxl')
+        return response
+
+    actions = ['export_to_excel','export_to_pdf']
 
 
     # def get_urls(self):
@@ -63,6 +91,9 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
     #     except District.DoesNotExist:
     #         print({'error': 'No districts found for the given state'})
     #         return JsonResponse({'error': 'No districts found for the given state'}, status=404)
+
+
+
 
 
 # Register models in the admin site

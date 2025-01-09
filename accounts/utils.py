@@ -6,7 +6,7 @@ from django.core.mail import EmailMessage
 from django.db.models import Count
 from django.db.models import Avg
 from django.db.models.functions import ExtractYear
-from .models import PatientRegistration  # Ensure the correct import path for your model
+from accounts.models import PatientRegistration  # Ensure the correct import path for your model
 from django.db.models.functions import TruncMonth
 
 class Utils:
@@ -149,7 +149,6 @@ def get_patient_data_per_month():
 
 """PATIENT STATISTICS START"""
 
-
 def patient_statistics():
 
     total_patients = PatientRegistration.objects.count()
@@ -163,13 +162,110 @@ def patient_statistics():
     total_other = gender_stats.get('OTHER', 0)
     total_prefer_not_to_say = gender_stats.get('PREFER_NOT_TO_SAY', 0)
 
-    # context = {
-    #     'total_patients': total_patients,
-    #     'total_male': total_male,
-    #     'total_female': total_female,
-    #     'total_other': total_other,
-    #     'total_prefer_not_to_say': total_prefer_not_to_say,
-    # }
     return total_patients,total_male,total_female,total_other
 
 """PATIENT STATISTICS END"""
+
+
+
+"""BELOW CODE IS FOR POPULATE THE DATABASE FOR STATE WISE DISTRICT"""
+
+import os
+import json
+from accounts.models import State, District
+
+# Function to load the states and districts from JSON
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'rmrims_api.settings'
+import django
+
+def load_states_and_district(file_path):
+
+    django.setup()
+
+  
+    with open(file_path, 'r') as file:  # Open the file with the correct path
+        data = json.load(file)
+        
+        print(f'data: {data}')
+
+    for state_data in data:
+        state_name = state_data['state']
+
+        state, created = State.objects.get_or_create(name=state_name)  # Case-insensitive lookup
+
+        # Debugging: Check if the state is created or already exists
+        
+        print(f"State: {state_name}, Created: {created}")
+
+        for district_name in state_data['districts']:
+
+            # Debugging: Check if the district is being created
+            district, created = District.objects.get_or_create(name=district_name, state=state)
+
+            print(f"District: {district_name}, Created: {created}")
+
+    print("Data successfully loaded into the database.")
+
+
+
+
+
+
+'''
+NOTE:
+
+RUN BELOW CODE TO POPULATE THE DATA
+
+python manage.py shell
+from utils import load_states_and_districts
+load_states_and_district(r'static\account\data\states_data.json')
+
+'''
+
+
+"""CODE END"""
+
+
+
+"""load_data.py code written below"""
+
+# import os
+# import django
+# import json
+
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'rmrims_api.settings'
+
+# import django
+# django.setup()
+
+# from accounts.models import State, District
+
+# # Function to load the states and districts from JSON
+# def load_states_and_districts(file_path):
+#     with open(file_path, 'r') as file:  # Open the file with the correct path
+#         data = json.load(file)
+        
+#         print(f'data: {data}')
+
+#     for state_data in data:
+#         state_name = state_data['state']
+#         state, created = State.objects.get_or_create(name=state_name)  # Case-insensitive lookup
+
+#         # Debugging: Check if the state is created or already exists
+#         print(f"State: {state_name}, Created: {created}")
+
+#         for district_name in state_data['districts']:
+#             # Debugging: Check if the district is being created
+#             district, created = District.objects.get_or_create(name=district_name, state=state)
+#             print(f"District: {district_name}, Created: {created}")
+
+#     print("Data successfully loaded into the database.")
+
+# # Path to your JSON file
+# file_path = 'states_data.json'  # Update this with your JSON file's path
+
+# # Call the function to load data
+# load_states_and_districts(file_path)
+
+

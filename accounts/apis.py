@@ -197,8 +197,6 @@ def password_reset(request, uid, token):
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.core.validators import validate_slug
-from django.core.exceptions import ValidationError
 from django.db import DatabaseError
 import logging
 from .models import State
