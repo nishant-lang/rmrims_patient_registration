@@ -196,7 +196,7 @@ def load_states_and_district(file_path):
 
         # Debugging: Check if the state is created or already exists
         
-        print(f"State: {state_name}, Created: {created}")
+        # print(f"State: {state_name}, Created: {created}")
 
         for district_name in state_data['districts']:
 
