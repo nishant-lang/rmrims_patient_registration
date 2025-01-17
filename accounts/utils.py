@@ -41,36 +41,45 @@ class Utils:
 
 """"BAR CHART  CODE START""" 
 
-def get_patient_growth_data():
+def get_patient_growth_data(year=True):
     # Fetch and annotate data based on appointment year
+    if year:
+        mx_of_year=10
 
-    mx_of_year=10
+        patients_by_years = PatientRegistration.objects.annotate(year=ExtractYear('appointment_date'))\
+        .values('year')\
+        .annotate(total_patients=Count('id'))\
+        .order_by('year')
+        
+        total_number_year=len(patients_by_years)
 
-    patients_by_years = PatientRegistration.objects.annotate(year=ExtractYear('appointment_date'))\
-    .values('year')\
-    .annotate(total_patients=Count('id'))\
-    .order_by('year')
-    
-    
-    total_number_year=len(patients_by_years)
+        if total_number_year>=mx_of_year:
+            # print('if part runed....')
+            start_year_from=total_number_year-mx_of_year
+            # Prepare the data for charts
+            years = [entry['year'] for entry in patients_by_years][start_year_from:]
+            patient_growth = [entry['total_patients'] for entry in patients_by_years][start_year_from:]
 
-    if total_number_year>=mx_of_year:
+            return years, patient_growth
+        
+        else:
+            # print('else part runed.....')
+            years = [entry['year'] for entry in patients_by_years]
+            patient_growth = [entry['total_patients'] for entry in patients_by_years]
 
-        # print('if part runed....')
-        start_year_from=total_number_year-mx_of_year
+            return years, patient_growth
+    else:
+        patients_by_years = PatientRegistration.objects.annotate(year=ExtractYear('appointment_date'))\
+        .values('year')\
+        .annotate(total_patients=Count('id'))\
+        .order_by('year')
 
         # Prepare the data for charts
-        years = [entry['year'] for entry in patients_by_years][start_year_from:]
-        patient_growth = [entry['total_patients'] for entry in patients_by_years][start_year_from:]
-
-        return years, patient_growth
-    
-    else:
-        # print('else part runed.....')
         years = [entry['year'] for entry in patients_by_years]
         patient_growth = [entry['total_patients'] for entry in patients_by_years]
 
         return years, patient_growth
+    
 
 """"BAR CHART  CODE END""" 
 
@@ -95,6 +104,7 @@ def get_department_patient_data():
 """"PIE CHART  CODE END""" 
 
 """HORIZONTAL CHART  CODE START"""
+
 def patient_age_per_department():
     department_avg_ages=PatientRegistration.objects.values('department').annotate(avg_age=Avg('age')).order_by('department')
 
@@ -149,6 +159,7 @@ def get_patient_data_per_month():
 
 """PATIENT STATISTICS START"""
 
+
 def patient_statistics():
 
     total_patients = PatientRegistration.objects.count()
@@ -194,9 +205,7 @@ def load_states_and_district(file_path):
 
         state, created = State.objects.get_or_create(name=state_name)  # Case-insensitive lookup
 
-        # Debugging: Check if the state is created or already exists
-        
-        # print(f"State: {state_name}, Created: {created}")
+
 
         for district_name in state_data['districts']:
 

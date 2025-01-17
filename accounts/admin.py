@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import CustomUser,District,State,PatientRegistration
 
+from accounts.utils import patient_statistics,get_patient_growth_data
 # Register your models here.
 
 
@@ -79,9 +80,13 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
 
         data=queryset.values()
 
+        print(data)
+
         # Example implementation for generating a simple PDF
         response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="patients_data.pdf"'
+
+        # response['Content-Disposition'] = 'attachment; filename="patients_data.pdf"'
+        response['Content-Disposition'] = 'inline; filename="patients_data.pdf"'
 
 
         # Generate PDF using ReportLab
@@ -124,16 +129,68 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
         y -= 20  # Move down after the line
 
 
-        # Add example content, ensuring it's within the 90% width area
+        total_patients,total_male,total_female,total_other=patient_statistics()
+       
+
+            # Set the initial x-position
+        x_start = content_start_x
+
+        # Set font for the text (same font for all)
         p.setFont("Helvetica", 12)
-        example_text = "This is an example of content restricted to 90% of the page width."
-        p.drawString(content_start_x, y, example_text)
-        y -= 20
+
+        # Define each part of the content
+        content_patients = f"Total Patients: {total_patients}"
+        content_male = f"Male: {total_male}"
+        content_female = f"Female: {total_female}"
+        content_other = f"Other: {total_other}"
+
+        # Calculate the width of each string
+        width_patients = p.stringWidth(content_patients, "Helvetica", 12)
+        width_male = p.stringWidth(content_male, "Helvetica", 12)
+        width_female = p.stringWidth(content_female, "Helvetica", 12)
+        width_other = p.stringWidth(content_other, "Helvetica", 12)
+
+        # Add horizontal spacing between each string based on their widths
+        space_between =100  # This is the space between the texts (adjust as needed)
+
+        # Draw Total Patients with auto width
+        p.setFillColor(HexColor("#1F77B4"))  # Blue color
+        p.drawString(x_start, y, content_patients)
+        x_start += width_patients + space_between  # Move x-position to the right based on text width
+
+        # Draw Male with auto width
+        p.setFillColor(HexColor("#2CA02C"))  # Green color
+        p.drawString(x_start, y, content_male)
+        x_start += width_male + space_between  # Move x-position to the right
+
+        # Draw Female with auto width
+        p.setFillColor(HexColor("#9467BD"))  # Purple color
+        p.drawString(x_start, y, content_female)
+        x_start += width_female + space_between  # Move x-position to the right
+
+        # Draw Other with auto width
+        p.setFillColor(HexColor("#FF5733"))  # Orange color
+        p.drawString(x_start, y, content_other)
+        y -= 20  # Move down for the next line
+
 
         # Additional content can also respect the boundaries
-        additional_text = "All content is horizontally centered and restricted to 90% width."
-        p.drawString(content_start_x, y, additional_text)
-        y -= 20
+        years,patients = get_patient_growth_data(year=False)
+        
+        print(years,patients)
+        
+        patient_growth = {}
+
+        for year, patient in zip(years, patients):
+            patient_growth[year] = patient
+
+        # print(patient_growth[year],patient_growth[patient])
+      
+
+        additional_text = f"Patient Growth: {years} - {patient_growth}"
+        
+        # p.drawString(content_start_x, y, patient_growth['year'],patient_growth['patient'])
+        # y -= 20
 
         # Draw another horizontal line to separate sections
         p.line(content_start_x, y, content_end_x, y)
