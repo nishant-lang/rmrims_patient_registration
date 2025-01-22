@@ -2,8 +2,31 @@ from django.contrib import admin
 from .models import CustomUser,District,State,PatientRegistration
 
 from accounts.utils import patient_statistics,get_patient_growth_data
-# Register your models here.
 
+
+
+
+from django.contrib import admin
+from .models import PatientRegistration, State, District
+
+import pandas as pd
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.platypus import Table
+from reportlab.platypus import Table, TableStyle
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+from django.contrib import admin
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.colors import HexColor
+from accounts.models import PatientRegistration
+
+
+# Register your models here.
 
 @admin.register(CustomUser)
 
@@ -18,17 +41,6 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 """Register State and District"""
 
-from django.contrib import admin
-from .models import PatientRegistration, State, District
-
-import pandas as pd
-from reportlab.pdfgen import canvas
-
-from django.contrib import admin
-from django.http import HttpResponse
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.colors import HexColor
-from accounts.models import PatientRegistration
 
 
 class PatientRegistrationAdmin(admin.ModelAdmin):
@@ -80,7 +92,7 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
 
         data=queryset.values()
 
-        print(data)
+        # print(data)
 
         # Example implementation for generating a simple PDF
         response = HttpResponse(content_type='application/pdf')
@@ -91,6 +103,7 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
 
         # Generate PDF using ReportLab
         page_width, page_height = letter  # Letter page size (612x792 points)
+
         content_width = page_width * 0.9  # 90% of the page width
         content_start_x = (page_width - content_width) / 2  # Left margin
         content_end_x = content_start_x + content_width  # Right margin
@@ -173,28 +186,113 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
         p.drawString(x_start, y, content_other)
         y -= 20  # Move down for the next line
 
+  
+        # Draw Table
+       
+        years, patients = get_patient_growth_data(year=False)
 
-        # Additional content can also respect the boundaries
-        years,patients = get_patient_growth_data(year=False)
+        patient_growth = {year: patient for year, patient in zip(years, patients)}
         
-        print(years,patients)
+        table_data = [['Year', 'Patients']] + [[year, patient_growth[year]] for year in patient_growth]
+
+        print(table_data)
+
+        # Full page width
+
+        content_width = page_width  # Use the full page width (or set content_width if margins are required)
+        num_columns = len(table_data[0])  # Number of columns in the table
+
+        column_width = content_width / num_columns*0.9  # Equal width for all columns
+       
+
+
+        table = Table(table_data, colWidths=[column_width] * num_columns)
+
+        table_style = TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+            ('FONTSIZE', (0, 1), (-1, -1), 10),
+        ])
+        table.setStyle(table_style)
+        table.wrapOn(p, page_width, page_height)
+        table.drawOn(p, content_start_x, y - len(table_data) * 21)
         
-        patient_growth = {}
 
-        for year, patient in zip(years, patients):
-            patient_growth[year] = patient
 
-        # print(patient_growth[year],patient_growth[patient])
-      
+        # Define the top margin and existing header
+        margin_top = 100
+        # Subheading text
+        subheading_text = "Patient number per year:"
 
-        additional_text = f"Patient Growth: {years} - {patient_growth}"
+        # Set the font for the subheading
+        p.setFont("Helvetica-Bold", 12)
+        p.setFillColor('green')  # Dark gray color
+
+        # Calculate position for subheading (just below the header)
+        y = page_height - margin_top - 20  # You can adjust the value to control spacing from the top
+
+        # Draw subheading
+        p.drawString(content_start_x, y, subheading_text)
+
+        # Move y position down after the subheading for the table
+
+        y -= 30  # Space between subheading and table (adjust as needed)
+            
+       
+
+       # Step 1: Create and Save the Pie Chart as an Image
+
+        fig, ax = plt.subplots(figsize=(6,6), subplot_kw=dict(aspect="equal"))
+
+        recipe = ["375 g flour", "75 g sugar", "250 g butter", "300 g berries"]
+
+        data = [float(x.split()[0]) for x in recipe]
+        print(data)
+
+        ingredients = [x.split()[-1] for x in recipe]
+
+        def func(pct, allvals):
+            absolute = int(np.round(pct / 100. * np.sum(allvals)))
+            return f"{pct:.1f}%\n({absolute:d} g)"
+
+        wedges, texts, autotexts = ax.pie(
+            data,
+            autopct=lambda pct: func(pct, data),
+            textprops=dict(color="w")
+        )
+
+        ax.legend(
+            wedges,
+            ingredients,
+            title="Ingredients",
+            loc="center left",
+            bbox_to_anchor=(1, 0, 0.5, 1)
+        )
+
+        plt.setp(autotexts, size=8, weight="bold")
+        ax.set_title("Patient Distribution")
+
+        # Save the figure as an image
+        chart_path = "pie_chart.png"
+        plt.savefig(chart_path, bbox_inches="tight")  # Save the chart with a tight layout
+        plt.close()
         
-        # p.drawString(content_start_x, y, patient_growth['year'],patient_growth['patient'])
+        # Step 2: Draw the Image on the PDF 
+        content_start_x = 50  # Horizontal position from the left
+        content_start_y = 100  # Vertical position from the bottom
+
+        p.drawImage(chart_path, content_start_x, content_start_y, width=300, height=300)
+
+    
+
+
+        # p.line(content_start_x, y, content_end_x, y)
         # y -= 20
-
-        # Draw another horizontal line to separate sections
-        p.line(content_start_x, y, content_end_x, y)
-        y -= 20
 
         p.save()  # Finalize and save the PDF
     
