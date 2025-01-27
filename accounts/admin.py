@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import CustomUser,District,State,PatientRegistration
 
-from accounts.utils import patient_statistics,get_patient_growth_data
+from accounts.utils import patient_statistics,get_patient_growth_data,get_department_patient_data
 
 
 
@@ -109,7 +109,6 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
         content_end_x = content_start_x + content_width  # Right margin
 
 
-
         # Generate PDF using ReportLab
         p = canvas.Canvas(response, pagesize=letter)
         y = 750  # Starting Y position for the text
@@ -195,7 +194,7 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
         
         table_data = [['Year', 'Patients']] + [[year, patient_growth[year]] for year in patient_growth]
 
-        print(table_data)
+        # print(table_data)
 
         # Full page width
 
@@ -204,7 +203,6 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
 
         column_width = content_width / num_columns*0.9  # Equal width for all columns
        
-
 
         table = Table(table_data, colWidths=[column_width] * num_columns)
 
@@ -218,64 +216,61 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
             ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
             ('FONTSIZE', (0, 1), (-1, -1), 10),
         ])
+
         table.setStyle(table_style)
         table.wrapOn(p, page_width, page_height)
         table.drawOn(p, content_start_x, y - len(table_data) * 21)
         
-
-
         # Define the top margin and existing header
         margin_top = 100
         # Subheading text
-        subheading_text = "Patient number per year:"
+        subheading_text = "Patient registerd numbers per year:"
 
         # Set the font for the subheading
-        p.setFont("Helvetica-Bold", 12)
+        p.setFont("Helvetica-Bold", 13)
         p.setFillColor('green')  # Dark gray color
-
-        # Calculate position for subheading (just below the header)
-        y = page_height - margin_top - 20  # You can adjust the value to control spacing from the top
-
-        # Draw subheading
+        y = page_height - margin_top - 20  
         p.drawString(content_start_x, y, subheading_text)
-
-        # Move y position down after the subheading for the table
-
         y -= 30  # Space between subheading and table (adjust as needed)
             
-       
 
        # Step 1: Create and Save the Pie Chart as an Image
-
         fig, ax = plt.subplots(figsize=(6,6), subplot_kw=dict(aspect="equal"))
 
-        recipe = ["375 g flour", "75 g sugar", "250 g butter", "300 g berries"]
+        custom_colors = [ '#FF6384', '#36A2EB', '#FFCE56', '#EB5B00', '#9966FF', '#4BC0C0']
 
-        data = [float(x.split()[0]) for x in recipe]
-        print(data)
+        department, patient_count = get_department_patient_data()
 
-        ingredients = [x.split()[-1] for x in recipe]
+        data=[float(x) for x in patient_count]
 
-        def func(pct, allvals):
-            absolute = int(np.round(pct / 100. * np.sum(allvals)))
-            return f"{pct:.1f}%\n({absolute:d} g)"
+        department = [x[0] for x in department]
+
+      
+        def func(pct):
+            return f"{pct:.1f}%"
 
         wedges, texts, autotexts = ax.pie(
             data,
-            autopct=lambda pct: func(pct, data),
-            textprops=dict(color="w")
+            autopct=lambda pct: func(pct),
+            textprops=dict(color="w"),
+            colors=custom_colors
         )
 
         ax.legend(
             wedges,
-            ingredients,
-            title="Ingredients",
+            department,
+            title="Departments",
             loc="center left",
-            bbox_to_anchor=(1, 0, 0.5, 1)
+            bbox_to_anchor=(1, 0, 0.6, 1),  # Adjust width here
+            fontsize=12,  # Increase font size for better readability
+            borderpad=1.5,  # Add padding around the legend box
+            title_fontsize=16,  # Increase the font size of the title
+            handlelength=3  # Increase the length of the legend handles
         )
 
+
         plt.setp(autotexts, size=8, weight="bold")
-        ax.set_title("Patient Distribution")
+       
 
         # Save the figure as an image
         chart_path = "pie_chart.png"
@@ -286,11 +281,20 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
         content_start_x = 50  # Horizontal position from the left
         content_start_y = 100  # Vertical position from the bottom
 
+        
+    
         p.drawImage(chart_path, content_start_x, content_start_y, width=300, height=300)
 
+        # Step 3: Add a Subheading for the Pie Chart
+        
+        y-=255 
+        x=content_start_x-20
+        patient_distribution="Department wise patient distribution:"
+        p.setFont("Helvetica-Bold", 13)
+        p.setFillColor('green')  # Dark gray color
+        p.drawString(x, y,patient_distribution)
     
-
-
+    
         # p.line(content_start_x, y, content_end_x, y)
         # y -= 20
 

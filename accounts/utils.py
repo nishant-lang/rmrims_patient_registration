@@ -69,6 +69,7 @@ def get_patient_growth_data(year=True):
 
             return years, patient_growth
     else:
+        
         patients_by_years = PatientRegistration.objects.annotate(year=ExtractYear('appointment_date'))\
         .values('year')\
         .annotate(total_patients=Count('id'))\
@@ -91,15 +92,19 @@ def get_department_patient_data():
     department_data = PatientRegistration.objects.values('department')\
         .annotate(patient_count=Count('id'))\
         .order_by('department')
-        
+    
+    
+    
     # Prepare the labels and data arrays
+
     department = [[entry['department']] for entry in department_data]
     patient_count = [entry['patient_count'] for entry in department_data]
     
+    
     print('department:', department)
-    print('patient_count:',patient_count )
+    print('patient_count:',patient_count)
 
-    return department, patient_count
+    return department, patient_count 
 
 """"PIE CHART  CODE END""" 
 
@@ -164,7 +169,9 @@ def patient_statistics():
 
     total_patients = PatientRegistration.objects.count()
     gender_counts = PatientRegistration.objects.values('gender').annotate(count=Count('gender'))
-
+    
+    print(gender_counts)
+    
     # Prepare gender-specific counts
     gender_stats = {item['gender']: item['count'] for item in gender_counts}
 
@@ -237,7 +244,11 @@ load_states_and_district(r'static\account\data\states_data.json')
 
 
 
-"""load_data.py code written below"""
+"""Load_data.py code written below.
+Do not delete the below code is will be usefull while depolyment.
+"""
+
+
 
 # import os
 # import django
