@@ -61,22 +61,36 @@ class PatientRegistrationAdmin(admin.ModelAdmin):
     @admin.action(description="Export to Excel")
     def export_to_excel(self, request, queryset):
 
-        data = queryset.values('name', 'gender', 'age', 'department', 'consultation_type', 'state', 'district', 'appointment_date', 'registered_by')
+        
+        data = queryset.values(
+        'name', 'gender', 'age', 'department', 'consultation_type',
+        'state__name', 'district__name', 'appointment_date',
+        'registered_by__first_name', 'registered_by__last_name'  # Fetch names separately
+        )
 
+        # Convert QuerySet values to a list and modify it
+        data = list(data)  # Convert QuerySet to a list of dictionaries
+        # print(data)
+        for obj in data:
+            obj['Registered By'] = f"{obj.pop('registered_by__first_name', '')} {obj.pop('registered_by__last_name', '')}".strip()
+
+            print(obj['Registered By'])
+
+        # Create DataFrame
         df = pd.DataFrame(data)
 
+        # Rename columns
         df.rename(columns={
-            'name':'Name',
-            'gender':'Gender',
-            'age':'Age',
-            'department':'Department',
-            'consultation_type':'Consultation Type',
-            'state': 'State',
-            'district': 'District',
-            'appointment_date':'Appointment Date',      
-            'registered_by': 'Registered By',
-
+            'name': 'Name',
+            'gender': 'Gender',
+            'age': 'Age',
+            'department': 'Department',
+            'consultation_type': 'Consultation Type',
+            'state__name': 'State',
+            'district__name': 'District',
+            'appointment_date': 'Appointment Date'
         }, inplace=True)
+
 
         # Generate Excel response
         response = HttpResponse(content_type='application/vnd.ms-excel')
